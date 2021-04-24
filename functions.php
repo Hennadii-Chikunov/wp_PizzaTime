@@ -1,0 +1,43 @@
+<?php
+
+add_filter('show_admin_bar', '__return_false');
+
+// убираем лишние теги wordpress для очистки проекта
+remove_action('wp_head', 'print_emoji_detection_script', 7 );
+remove_action('admin_print_scripts', 'print_emoji_detection_script' );
+remove_action('wp_print_styles', 'print_emoji_styles' );
+remove_action('admin_print_styles', 'print_emoji_styles' );
+
+remove_action( 'wp_head', 'wp_resource_hints', 2 );
+remove_action( 'wp_head', 'wp_shortlink_wp_head' );
+remove_action('wp_head', 'wlwmanifest_link');
+remove_action('wp_head', 'wp_generator'); // remove meta name generator
+remove_action('wp_head', 'rsd_link'); // remove EditURI
+remove_action('wp_head', 'rest_output_link_wp_head');
+remove_action('wp_head', 'rel_canonical');
+remove_action('wp_head', 'wp_oembed_add_discovery_links');
+
+
+add_action('wp_enqueue_scripts', 'site_scripts');
+
+function site_scripts() {
+	// переменная версии всех стилей меняем в одном месте, здесь
+	$version = '0.0.0.0';
+   // данная функция удаляет лишний тег из head   
+	// wp_dequeue_style отключает стили
+	wp_dequeue_style('wp-block-library');
+	wp_deregister_script( 'wp-embed' ); // отключает ненужный скрипт
+
+	// подключает стили
+	wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Roboto:wght@300&display=swap', [], $version);
+	wp_enqueue_style('main-style', get_stylesheet_uri(), [], $version);
+// подключил библиотеку focus VISIBLE для людей с ограниченными возможностями
+	wp_enqueue_script('focus-visible', 'https://unpkg.com/focus-visible@5.2.0/dist/focus-visible.js', [], $version, true);
+	wp_enqueue_script('lazy-load', 'https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js', [], $version, true);
+	wp_enqueue_script('main-js', get_template_directory_uri() . '/assets/js/main.js', ['focus-visible', 'lazy-load'], $version, true);
+
+	// внешние скрипты js  подключаются через, ниже пример и в нем указывается зависимость
+	wp_localize_script('main-js', 'WPJS', [
+       'siteUrl' => get_template_directory_uri(),
+	]);
+}
