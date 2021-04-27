@@ -17,6 +17,7 @@ Template Name: Главная
 		</div>
 	</section>
 	<!-- / section-TOP -->
+
 	<!-- section CATALOG -->
 	<section class="section section-catalog">
 		<div class="container">
@@ -334,35 +335,37 @@ Template Name: Главная
 			  </header>
 			  <div class="contacts">
 				  <div class="contacts__start">
-					  <div class="contacts__map">
-						<iframe
-							src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d169324.28011605714!2d34.860271!3d48.4624412!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d958c121a011ad%3A0x551e50cefbc2cc1e!2z0YPQuy4g0K_QvdGC0LDRgNC90LDRjywgNzksINCU0L3QuNC_0YDQviwg0JTQvdC10L_RgNC-0L_QtdGC0YDQvtCy0YHQutCw0Y8g0L7QsdC70LDRgdGC0YwsIDQ5MDAw!5e0!3m2!1sru!2sua!4v1618786428663!5m2!1sru!2sua"
-							 style="border:0; width: 100%; height: 100%" allowfullscreen="" loading="lazy"></iframe>
+					  <div class="contacts__map" id="ymap" data-coordinates="<?php echo $GLOBALS['pizza_time']['map_coordinates']; ?>" data-address="<?php echo $GLOBALS['pizza_time']['address']; ?>">
 					  </div>
 				  </div>
 				<div class="contacts__end">
 					<address>
-						<div class="contacts__item">
+						<?php if ($GLOBALS['pizza_time']['address']) : ?>
+                     <div class="contacts__item">
 							<span class="contacts__title">Адрес</span>
-							<p class="contacts__text">г. Днепр, Вкусная пицца во дворе, 79</p>
+							<p class="contacts__text"><?php echo $GLOBALS['pizza_time']['address']; ?></p>
 						</div>
+                  <?php endif; ?>
 						<div class="contacts__item">
 							<span class="contacts__title">Телефон</span>
-							<a href="tel:+380639999999" class="contacts__phone">+380 (63) 999-99-99</a>
+							<a href="tel:<?php echo $GLOBALS['pizza_time']['phone_digits']; ?>" class="contacts__phone"><?php echo $GLOBALS['pizza_time']['phone']; ?></a>
 						</div>
 						<div class="contacts__item">
 							<span class="contacts__title">Социальные сети</span>
 							<ul class="socials">
+							 <?php if ($GLOBALS['pizza_time']['in_url']) : ?>
 								<li class="socials__item">
-									<a href="#" class="socials__link" target="_blank">
+									<a href="<?php echo $GLOBALS['pizza_time']['in_url']; ?>" class="socials__link" target="_blank">
 										<svg class="socials__icon socials__icon--in" viewBox="0 0 512 512" width="40" height="40" xmlns="http://www.w3.org/2000/svg">
 											<path
 												d="m256 0c-141.363281 0-256 114.636719-256 256s114.636719 256 256 256 256-114.636719 256-256-114.636719-256-256-256zm-74.390625 387h-62.347656v-187.574219h62.347656zm-31.171875-213.1875h-.40625c-20.921875 0-34.453125-14.402344-34.453125-32.402344 0-18.40625 13.945313-32.410156 35.273437-32.410156 21.328126 0 34.453126 14.003906 34.859376 32.410156 0 18-13.53125 32.402344-35.273438 32.402344zm255.984375 213.1875h-62.339844v-100.347656c0-25.21875-9.027343-42.417969-31.585937-42.417969-17.222656 0-27.480469 11.601563-31.988282 22.800781-1.648437 4.007813-2.050781 9.609375-2.050781 15.214844v104.75h-62.34375s.816407-169.976562 0-187.574219h62.34375v26.558594c8.285157-12.78125 23.109375-30.960937 56.1875-30.960937 41.019531 0 71.777344 26.808593 71.777344 84.421874zm0 0" />
 										</svg>
 									</a>
 								</li>
+								<?php endif; ?>
+								<?php if ($GLOBALS['pizza_time']['twit_url']) : ?>
 								<li class="socials__item">
-									<a href="#" class="socials__link" target="_blank">
+									<a href="<?php echo $GLOBALS['pizza_time']['twit_url']; ?>" class="socials__link" target="_blank">
 										<svg class="socials__icon socials__icon--twit" width="40" height="40" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512">
 											<g>
 												<path d="M512,97.248c-19.04,8.352-39.328,13.888-60.48,16.576c21.76-12.992,38.368-33.408,46.176-58.016
@@ -377,8 +380,10 @@ Template Name: Главная
 										</svg>
 									</a>
 								</li>
+								<?php endif; ?>
+								<?php if ($GLOBALS['pizza_time']['insta_url']) : ?>
 								<li class="socials__item">
-									<a href="#" class="socials__link" target="_blank">
+									<a href="<?php echo $GLOBALS['pizza_time']['insta_url']; ?>" class="socials__link" target="_blank">
 										<svg class="socials__icon socials__icon--insta" width="40" height="40" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512">
 											<g>
 												<path d="M359.312,0H152.689C68.849,0,0.64,68.208,0.64,152.049v207.903C0.64,443.792,68.849,512,152.689,512h206.623
@@ -414,6 +419,7 @@ Template Name: Главная
 										</svg>
 									</a>
 								</li>
+								<?php endif; ?>
 							</ul>
 						</div>
 					</address>

@@ -144,9 +144,10 @@
    // функция закрытия попАПА при нажатии (клике) на кнопку закрыть и на затемненную область
 	myLib.body.addEventListener('click', function (e) {
 		var target = e.target;
+		var popupItemClose = myLib.closestItemByClass(target, 'popup-close');
 
 		// если таргет содержит попАП button close или класс popup__body
-		if (target.classList.contains('popup-close') ||
+		if (popupItemClose ||
 			 target.classList.contains('popup__body')) {
 			var popup = myLib.closestItemByClass(target, 'popup');
 			
@@ -237,6 +238,24 @@
 		}
 
 		e.preventDefault();
+		var scrollToItem = document.querySelector('.' + scrollToItemClass);
+
+		if (scrollToItem) {
+			smoothScroll(scrollToItem, 1000);
+		}
+	});
+  // решение скролла к элементам для wordpress
+	myLib.body.addEventListener('click', function (e) {
+		var target = e.target;
+		// создаем переменную scrollToItemClass
+		var href  = myLib.closestAttr(target, 'href');
+      
+		if (href === null || href[0] !== '#') {
+			return;
+		}
+
+		e.preventDefault();
+		var scrollToItemClass = href.slice(1);
 		var scrollToItem = document.querySelector('.' + scrollToItemClass);
 
 		if (scrollToItem) {
@@ -409,33 +428,64 @@
 	});
 })();
 /* product finish */
-/* map start */
-function initMap() {
-	var element = document.getElementById('gmap');
-	var options = {
-		zoom: 6,
-		center: { lat: 48.450001, lng: 34.983334 }
-	};
-	var myMap = new google.maps.Map(element, options);
-   var icon = {
-    url: '../img/common/marker.svg', // url
-    scaledSize: new google.maps.Size(50, 50), // scaled size
-    origin: new google.maps.Point(0,0), // origin
-    anchor: new google.maps.Point(0, 0) // anchor
-};
 
-	var InfoWindow = new google.maps.InfoWindow({
-    content: '<h3>PizzaTime OPEN 24/7</h3>'
-	});
-   var marker = new google.maps.Marker({
-		position: new google.maps.LatLng(48.450001, 34.983334),
-	map: myMap,
-	icon: icon	
-	});
-	marker.addListener('click', function () {
-		InfoWindow.open(myMap, marker);
-	})
-}
+/* map start */
+;(function() {
+  var sectionContacts = document.querySelector('.section-contacts');
+
+  var ymapInit = function() {
+    if (typeof ymaps === 'undefined') {
+      return;
+    }
+  
+    ymaps.ready(function () {
+      var ymap = document.querySelector('.contacts__map');
+      var coordinates = ymap.getAttribute('data-coordinates');
+      var address = ymap.getAttribute('data-address');
+
+      var myMap = new ymaps.Map('ymap', {
+              center: coordinates.split(','),
+              zoom: 16
+          }, {
+              searchControlProvider: 'yandex#search'
+          }),
+  
+          myPlacemark = new ymaps.Placemark(myMap.getCenter(), {
+              balloonContent: address
+          }, {
+              iconLayout: 'default#image',
+              iconImageHref: WPJS.siteUrl + '/assets/img/common/marker.svg',
+              iconImageSize: [40, 63.2],
+              iconImageOffset: [-50, -38]
+          });
+  
+      myMap.geoObjects.add(myPlacemark);
+  
+      myMap.behaviors.disable('scrollZoom');
+    });
+  };
+
+  var ymapLoad = function() {
+    var script = document.createElement('script');
+    script.src = 'https://api-maps.yandex.ru/2.1/?lang=en_RU';
+    myLib.body.appendChild(script);
+    script.addEventListener('load', ymapInit);
+  };
+
+  var checkYmapInit = function() {
+    var sectionContactsTop = sectionContacts.getBoundingClientRect().top;
+    var scrollTop = window.pageYOffset;
+    var sectionContactsOffsetTop = scrollTop + sectionContactsTop;
+
+    if (scrollTop + window.innerHeight > sectionContactsOffsetTop) {
+      ymapLoad();
+      window.removeEventListener('scroll', checkYmapInit);
+    }
+  };
+
+  window.addEventListener('scroll', checkYmapInit);
+  checkYmapInit();
+})();
 /* map finish */
 /* form start */
 ;(function() {

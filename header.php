@@ -31,32 +31,28 @@
 		 <div class="container header-page__container">
            <div class="header-page__start">
 				  <div class="logo">
+				   <?php if (is_front_page()) : ?>
+                   <img class="logo__img" src="<?php echo wp_get_attachment_image_url(carbon_get_theme_option( 'site_logo' )); ?>" alt="" width="127" height="21">
+               <?php else : ?>
+				   <a href="<?php echo get_home_url(); ?>">
 					  <!-- ИНЛАЙН СТИЛИ ПРОПИСАНЫ ДЛЯ ЛОГО С ЦЕЛЬЮ защитить размеры при "слете внешних стилей" -->
-					  <img  data-src="<?php echo get_template_directory_uri(); ?>/assets/img/common/logo.svg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="PizzaTime" class="logo__img lazy"  width="127" height="21">
+					  <img class="logo__img" src="<?php echo wp_get_attachment_image_url(carbon_get_theme_option( 'site_logo' ));?>" alt="PizzaTime" width="127" height="21">
+					</a>
+					<?php endif; ?>
 				  </div>
 			  </div>
 			  <div class="header-page__end">
 				  <nav class="header-page__nav">
-					  <ul class="header-page__list">
-						  <li class="header-page__item">
-							  <a href="#" class="header-page__link" data-scroll-to="section-catalog">
-								  <span class="header-page__link-name">пицца</span>
-							  </a>
-						  </li>
-						<li class="header-page__item">
-							<a href="#" class="header-page__link" data-scroll-to="section-about">
-								<span class="header-page__link-name">о нас</span>
-							</a>
-						</li>
-						<li class="header-page__item">
-							<a href="#" class="header-page__link" data-scroll-to="section-contacts">
-								<span class="header-page__link-name">контакты</span>
-							</a>
-						</li>
-					  </ul>
+				     <?php
+                      wp_nav_menu( [
+                     'theme_location'  => 'menu_main_header',
+                     'container'       => null, 
+                     'menu_class'      => 'header-page__list', 
+                   ] );
+                 ?>
 				  </nav>
 				  <div class="phone">
-					  <a href="tel:+380639999999" class="phone__item">+380 (63) 999-99-99</a>
+					  <a href="tel:<?php echo $GLOBALS['pizza_time']['phone_digits']; ?>" class="phone__item"><?php echo $GLOBALS['pizza_time']['phone']; ?></a>
 				  </div>
 				  <!-- меню бургер -->
 				  <div class="header-page__hamburger">

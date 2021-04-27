@@ -164,14 +164,19 @@
     margin: 0;
     list-style: none;
   }
-  &__link {
+  &__link,
+  &__ul a {
     text-decoration: none;
     font-family: $f-mont;
     font-weight: 900;
-    color: #fff;
+    color: #ffffff;
     font-size: 24px;
+    padding: 12px 0;
     display: block;
-    padding-bottom: 30px;
+    margin-bottom: 30px;
+    &:hover {
+      background: #430008;
+    }
   }
   &__li {
     text-align: center;

@@ -41,3 +41,35 @@ function site_scripts() {
        'siteUrl' => get_template_directory_uri(),
 	]);
 }
+
+add_action( 'after_setup_theme', 'theme_support' );
+function theme_support() {
+  register_nav_menu( 'menu_main_header', 'Меню в шапке' );
+}
+
+add_action( 'after_setup_theme', 'crb_load' );
+function crb_load() {
+    require_once('includes/carbon-fields/vendor/autoload.php' );
+    \Carbon_Fields\Carbon_Fields::boot();
+}
+
+// подключаем theme-options.php
+add_action('carbon_fields_register_fields', 'register_carbon_fields');
+function register_carbon_fields() {
+	 require_once('includes/carbon-fields-options/theme-options.php' );
+}
+
+// глобальные переменные для уменьшения количества запросов в базу данных
+add_action('init', 'create_global_variable');
+function create_global_variable() {
+	global $pizza_time;
+	$pizza_time = [
+     'phone' => carbon_get_theme_option('site_phone'),
+	  'phone_digits' => carbon_get_theme_option('site_phone_digits'),
+	  'address' => carbon_get_theme_option('site_address'),
+	  'map_coordinates' => carbon_get_theme_option( 'site_map_coordinates' ),
+	  'in_url' => carbon_get_theme_option( 'site_in_url' ),
+    'twit_url' => carbon_get_theme_option( 'site_twit_url' ),
+    'insta_url' => carbon_get_theme_option( 'site_insta_url' ),
+	];
+}
