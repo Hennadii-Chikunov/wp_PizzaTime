@@ -1,7 +1,7 @@
 	<!-- Footer -->
 	<footer class="footer-page">
 		<div class="container">
-			<div class="footer-page__text">PizzaTime 2021</div>
+			<div class="footer-page__text"><?php echo carbon_get_theme_option( 'site_footer_text' ) ?></div>
 		</div>
 	</footer>
 	<!--/ Footer -->

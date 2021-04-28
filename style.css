@@ -414,7 +414,7 @@ xs: 576px
   color: #ffffff;
   text-shadow: -1px 2px 4px rgba(0, 206, 186, 0.7);
   display: block;
-  padding: 15px 35px;
+  padding: 15px 20px;
   font-family: "Montserrat", sans-serif;
   font-weight: 900;
   border-radius: 35px;
@@ -429,7 +429,7 @@ xs: 576px
   .header-page__link,
   .header-page__list a {
     font-size: 16px;
-    padding: 23px 38px;
+    padding: 23px 25px;
   }
 }
 

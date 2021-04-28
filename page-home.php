@@ -3,16 +3,21 @@
 Template Name: Главная
 */
 ?>
-
+<?php $page_id = get_the_ID(); ?>
 <?php get_header(); ?>
 
 <!-- section-TOP -->
-	<section class="section-top lazy" data-bg="<?php echo get_template_directory_uri(); ?>/assets/img/section-top/bg-header.webp" data-bg-replace-webp="img/section-top/bg-header.jpg">
+<?php 
+	$top_img_id = carbon_get_post_meta( $page_id, 'top_img' );
+   $top_img_src = wp_get_attachment_image_url( $top_img_id, 'full');
+	$top_img_src_webp = convertToWebpSrc($top_img_src);
+	?>
+	<section class="section-top lazy" data-bg="<?php echo $top_img_src_webp; ?>" data-bg-replace-webp="<?php echo $top_img_src; ?>">
 		<div class="container section-top__container">
-			<p class="section-top__info">от итальянского повара</p>
-			<h1 class="section-top__title">Лучшая пицца в Днепре</h1>
+			<p class="section-top__info"><?php echo carbon_get_post_meta( $page_id, 'top_info' ); ?></p>
+			<h1 class="section-top__title"><?php echo carbon_get_post_meta( $page_id, 'top_title' );?></h1>
 			<div class="section-top__btn">
-				<button class="btn" type="button" data-scroll-to="section-catalog">Выбрать</button>
+				<button class="btn" type="button" data-scroll-to="<?php echo carbon_get_post_meta( $page_id, 'top_btn_scrool_to' );?>"><?php echo carbon_get_post_meta( $page_id, 'top_btn_text' );?></button>
 			</div>
 		</div>
 	</section>
@@ -22,7 +27,7 @@ Template Name: Главная
 	<section class="section section-catalog">
 		<div class="container">
          <header class="section__header">
-				<h2 class="section__title section__title--accent">Меню</h2>
+				<h2 class="section__title section__title--accent"><?php echo carbon_get_post_meta( $page_id, 'catalog_title' );?></h2>
 				<nav class="catalog-nav">
 					<ul class="catalog-nav__wrapper">
 						<li class="catalog-nav__item">
@@ -312,16 +317,14 @@ Template Name: Главная
 	<section class="section section-about">
 		<picture>
 			<source type="image/webp" data-srcset="<?php echo get_template_directory_uri(); ?>/assets/img/section-about/bg.webp" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" />
-			<img class="section-about__img lazy" data-src="img/section-catalog/9.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="about-bg" />
+			<img class="section-about__img lazy" data-src="<?php echo get_template_directory_uri(); ?>/assets/img/section-catalog/9.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="about-bg" />
 		</picture>
 		<div class="container section-about__container">
            <div class="section-about__content">
-				  <h2 class="section__title section-about__title">О нас</h2>
-				  <p class="section-about__text">
-					Доставим вам горячую пиццу менее чем за час или пицца бесплатно.
-					Мы готовим пиццу только из свежих продуктов. 
-					Каждый день мы покупаем свежие овощи, грибы и мясо.
-				  </p>
+				  <h2 class="section__title section-about__title"><?php echo carbon_get_post_meta( $page_id, 'about_title' );?></h2>
+				  <div class="section-about__text">
+					<?php echo carbon_get_post_meta( $page_id, 'about_text' );?>
+				  </div>
 			  </div>
 		</div>
 	</section>
@@ -329,9 +332,11 @@ Template Name: Главная
 	<!-- section CONTACTS -->
 	<section class="section section-contacts">
         <div class="container section-contacts__container">
-			<div class="section-contacts__img lazy" data-bg="<?php echo get_template_directory_uri(); ?>/assets/img/section-contacts/tomatoes.webp" data-bg-replace-webp="img/section-contacts/tomatoes.png"></div>
+		     <?php if (carbon_get_post_meta( $page_id, 'contacts_is_img' )) : ?>
+               <div class="section-contacts__img lazy" data-bg="<?php echo get_template_directory_uri(); ?>/assets/img/section-contacts/tomatoes.webp" data-bg-replace-webp="img/section-contacts/tomatoes.png"></div>
+           <?php endif; ?>
 			  <header class="section__header">
-				  <h2 class="section__title section-contacts__title">Контакты</h2>
+				  <h2 class="section__title section-contacts__title"><?php echo carbon_get_post_meta( $page_id, 'contacts_title' );?></h2>
 			  </header>
 			  <div class="contacts">
 				  <div class="contacts__start">

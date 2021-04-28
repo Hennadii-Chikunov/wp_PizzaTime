@@ -57,6 +57,7 @@ function crb_load() {
 add_action('carbon_fields_register_fields', 'register_carbon_fields');
 function register_carbon_fields() {
 	 require_once('includes/carbon-fields-options/theme-options.php' );
+	 require_once('includes/carbon-fields-options/post-meta.php' );
 }
 
 // глобальные переменные для уменьшения количества запросов в базу данных
@@ -72,4 +73,9 @@ function create_global_variable() {
     'twit_url' => carbon_get_theme_option( 'site_twit_url' ),
     'insta_url' => carbon_get_theme_option( 'site_insta_url' ),
 	];
+}
+
+function convertToWebpSrc($src) {
+  $src_webp = $src . '.webp';
+  return str_replace('uploads', 'uploads-webpc', $src_webp);
 }
