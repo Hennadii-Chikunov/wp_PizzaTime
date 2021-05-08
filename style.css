@@ -1235,8 +1235,8 @@ button {
 .section .catalog .product__img {
   display: block;
   margin: 0 auto 15px;
-  width: 340px;
-  height: 339px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 @media (max-width: 1200px) {
@@ -1290,8 +1290,15 @@ button {
   color: #d1c0c0;
   font-family: "Montserrat", sans-serif;
   font-weight: 900;
-  padding: 13px 33px;
+  padding: 13px 30px;
   border-radius: 21px;
+  -webkit-transition: flex-grow 0.3s, -webkit-box-flex 0.3s;
+  transition: flex-grow 0.3s, -webkit-box-flex 0.3s;
+  transition: flex-grow 0.3s;
+  transition: flex-grow 0.3s, -webkit-box-flex 0.3s, -ms-flex-positive 0.3s;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
 }
 
 @media (min-width: 993px) and (max-width: 1200px) {
@@ -1302,7 +1309,7 @@ button {
 
 @media (min-width: 320px) and (max-width: 350px) {
   .section .catalog .product__size {
-    padding: 12px 22px;
+    padding: 12px 20px;
   }
 }
 
@@ -1310,6 +1317,9 @@ button {
   color: #00baf8;
   -webkit-box-shadow: 3px 0px 5px 0px black;
           box-shadow: 3px 0px 5px 0px black;
+  -webkit-box-flex: 2;
+      -ms-flex-positive: 2;
+          flex-grow: 2;
 }
 
 .section .catalog .product__price {

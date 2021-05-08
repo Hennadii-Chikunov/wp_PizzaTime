@@ -695,9 +695,7 @@ button {
       &__img {
         display: block;
         margin: 0 auto 15px;
-        // высота и ширина были заданы в фиксированно, чтобы не было скачков изображений при обновлении страницы
-        width: 340px;
-        height: 339px;
+        object-fit: cover;
         @media (max-width: 1200px) {
           height: auto;
         }
@@ -736,17 +734,20 @@ button {
         color: #d1c0c0;
         font-family: $f-mont;
         font-weight: 900;
-        padding: 13px 33px;
+        padding: 13px 30px;
         border-radius: 21px;
+        transition: flex-grow 0.3s;
+        flex-grow: 1;
         @media (min-width: 993px) and (max-width: 1200px) {
           padding: 13 24px;
         }
         @media (min-width: 320px) and (max-width: 350px) {
-          padding: 12px 22px;
+          padding: 12px 20px;
         }
         &.is-active {
           color: #00baf8;
           box-shadow: 3px 0px 5px 0px rgba(0, 0, 0, 1);
+          flex-grow: 2;
         }
       }
       &__price {

@@ -101,7 +101,7 @@
 			<div class="popup__content popup__content--fluid">
 				<button class="btn-close popup__btn-close popup-close"></button>
                  <h2 class="section__title popup__title">Заполните форму</h2>
-					  <p class="popup__subtitle">Мы привезем вам горячую пиццу за 50 минут</p>
+					  <p class="popup__subtitle">Мы уже начали готовить ваш заказ!</p>
 					  <div class="order">
 						  <img class="order__img" src="" alt="pizza">
 						  <h3 class="order__title">

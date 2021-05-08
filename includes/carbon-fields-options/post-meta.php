@@ -23,6 +23,15 @@ Container::make( 'post_meta', __( 'Дополнительные поля' ) )
 
 			->add_tab( 'Каталог', [
             Field::make( 'text', 'catalog_title', 'Заголовок' ),
+				// с помощью этого кода мы добавляем товары в раздел каталог
+				 Field::make( 'association', 'catalog_products', 'Товары' )
+    ->set_types( [
+        [
+            'type'      => 'post',
+            'post_type' => 'product',
+        ]
+     ] )
+	  // с помощью этого кода мы добавляем товары в раздел каталог
          ])
 
 			->add_tab( 'О нас', [
@@ -36,3 +45,16 @@ Container::make( 'post_meta', __( 'Дополнительные поля' ) )
 				Field::make( 'checkbox', 'contacts_is_img', __( 'Показать изображение помидоров' ) ),
          ]);
 
+
+			Container::make( 'post_meta', 'Дополнительные поля' )
+  ->show_on_post_type('product')
+
+  ->add_tab( 'Информация товара', [
+      Field::make( 'text', 'product_price', 'Цена' ),
+      Field::make( 'complex', 'product_attributes', 'Атрибуты' )
+      ->set_max(3)
+      ->add_fields([
+        Field::make( 'text', 'name', 'Название' )->set_width(50),
+        Field::make( 'text', 'price', 'Цена' )->set_width(50),
+       ])
+  ]);

@@ -45,6 +45,10 @@ function site_scripts() {
 add_action( 'after_setup_theme', 'theme_support' );
 function theme_support() {
   register_nav_menu( 'menu_main_header', 'Меню в шапке' );
+  // добавляет изображение к записи когда добавляешь товар
+  add_theme_support('post-thumbnails');
+  add_image_size('product', 294, 300, true);
+   // добавляет изображение к записи когда добавляешь товар
 }
 
 add_action( 'after_setup_theme', 'crb_load' );
@@ -78,4 +82,48 @@ function create_global_variable() {
 function convertToWebpSrc($src) {
   $src_webp = $src . '.webp';
   return str_replace('uploads', 'uploads-webpc', $src_webp);
+}
+
+add_action( 'init', 'register_post_types' );
+function register_post_types() {
+  register_post_type('product', [
+    'labels' => [
+      'name'               => 'Товары', // основное название для типа записи
+      'singular_name'      => 'Товар', // название для одной записи этого типа
+      'add_new'            => 'Добавить товар', // для добавления новой записи
+      'add_new_item'       => 'Добавление товара', // заголовка у вновь создаваемой записи в админ-панели.
+      'edit_item'          => 'Редактирование товара', // для редактирования типа записи
+      'new_item'           => 'Новый товар', // текст новой записи
+      'view_item'          => 'Смотреть товар', // для просмотра записи этого типа.
+      'search_items'       => 'Искать товар', // для поиска по этим типам записи
+      'not_found'          => 'Не найдено', // если в результате поиска ничего не было найдено
+      'not_found_in_trash' => 'Не найдено в корзине', // если не было найдено в корзине
+      'menu_name'          => 'Товары', // название меню
+    ],
+    'menu_icon'          => 'dashicons-cart',
+    'public'             => true,
+    'menu_position'      => 5,
+    'supports'           => ['title', 'editor', 'thumbnail', 'excerpt'],
+    'has_archive'        => true,
+    'rewrite'            => ['slug' => 'products']
+   ] );
+
+   register_taxonomy('product-categories', 'product', [
+    'labels'        => [
+      'name'                        => 'Категории товаров',
+      'singular_name'               => 'Категория товаров',
+      'search_items'                =>  'Искать категории',
+      'popular_items'               => 'Популярные категории',
+      'all_items'                   => 'Все категории',
+      'edit_item'                   => 'Изменить категорию',
+      'update_item'                 => 'Обновить категорию',
+      'add_new_item'                => 'Добавить новую категорию',
+      'new_item_name'               => 'Новое название категории',
+      'separate_items_with_commas'  => 'Отделить категории запятыми',
+      'add_or_remove_items'         => 'Добавить или удалить категорию',
+      'choose_from_most_used'       => 'Выбрать самую популярную категорию',
+      'menu_name'                   => 'Категории',
+    ],
+    'hierarchical'  => true,
+  ]);
 }
