@@ -6,10 +6,17 @@
   $product_img_src = get_the_post_thumbnail_url($product_id, 'product');
   $product_img_src_webp = convertToWebpSrc($product_img_src);
 
-  
+  $product_categories = get_the_terms($product_id, 'product-categories');
+   $product_categories_str = '';
+  foreach ($product_categories as $category) {
+    $product_categories_str .= "$category->slug,";
+  }
+  $product_categories_str = substr($product_categories_str, 0, -1);
 ?>
 
+<div class="catalog__item" data-category=<?php echo $product_categories_str; ?>">
 <div class="product catalog__product">
+
 	<picture>
 		<source type="image/webp"
 			srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -49,4 +56,5 @@
 			<button class="btn product__btn" type="button" data-popup="popup-order">заказать</button>
 		</div>
 	</footer>
+</div>
 </div>

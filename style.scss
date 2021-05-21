@@ -387,7 +387,11 @@ $f-mont: "Montserrat", sans-serif;
 .js-focus-visible :focus:not(.focus-visible) {
   outline: none;
 }
-
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 img {
   max-width: 100%;
   height: auto;
@@ -449,6 +453,7 @@ button {
     box-shadow: none;
   }
 }
+
 // Section-top START
 .section-top {
   height: 100vh;
@@ -992,3 +997,35 @@ button {
   }
 }
 /* / .socials */
+
+/* страница товары */
+.single-page {
+  flex-grow: 1;
+}
+.nav-links {
+  display: flex;
+  justify-content: center;
+  a {
+    text-decoration: none;
+    font-size: 22px;
+    color: inherit;
+  }
+  a,
+  span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #041f1d;
+    border-right: 0;
+    color: #1da1f2;
+    font-weight: 900;
+  }
+  & *:last-child {
+    border: 2px solid #041f1d;
+  }
+  .current {
+    background-color: #00100f;
+  }
+}

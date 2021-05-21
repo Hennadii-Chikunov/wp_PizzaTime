@@ -23,6 +23,13 @@ Container::make( 'post_meta', __( 'Дополнительные поля' ) )
 
 			->add_tab( 'Каталог', [
             Field::make( 'text', 'catalog_title', 'Заголовок' ),
+				Field::make( 'association', 'catalog_nav', 'Категории товаров' )
+    ->set_types( [
+        [
+            'type'      => 'term',
+            'taxonomy' => 'product-categories',
+        ]
+    ] ),
 				// с помощью этого кода мы добавляем товары в раздел каталог
 				 Field::make( 'association', 'catalog_products', 'Товары' )
     ->set_types( [

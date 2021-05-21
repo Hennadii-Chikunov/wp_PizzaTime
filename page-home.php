@@ -24,24 +24,29 @@ Template Name: Главная
 	<!-- / section-TOP -->
 
 	<!-- section CATALOG -->
-	<section class="section section-catalog">
+	<section class="section section-catalog js-section-catalog">
 		<div class="container">
          <header class="section__header">
 				<h2 class="section__title section__title--accent"><?php echo carbon_get_post_meta( $page_id, 'catalog_title' );?></h2>
 				<nav class="catalog-nav">
+
+				 <?php
+           $catalog_nav = carbon_get_post_meta($page_id, 'catalog_nav');
+           $catalog_nav_ids = wp_list_pluck($catalog_nav, 'id');
+           
+           $catalog_nav_items = get_terms([
+            'include' => $catalog_nav_ids,
+           ]);
+        ?>
 					<ul class="catalog-nav__wrapper">
 						<li class="catalog-nav__item">
 							<button class="catalog-nav__btn is-active" type="button" data-filter="all">все</button>
 						</li>
-						<li class="catalog-nav__item">
-							<button class="catalog-nav__btn" type="button" data-filter="mushrooms">грибные</button>
-						</li>
-						<li class="catalog-nav__item">
-							<button class="catalog-nav__btn" type="button" data-filter="meat">мясные</button>
-						</li>
-						<li class="catalog-nav__item">
-							<button class="catalog-nav__btn" type="button" data-filter="cheese">сырные</button>
-						</li>
+						<?php foreach ($catalog_nav_items as $item) : ?>
+            <li class="catalog-nav__item">
+              <button class="catalog-nav__btn" type="button" data-filter="<?php echo $item->slug; ?>"><?php echo $item->name; ?></button>
+            </li>
+          <?php endforeach; ?>
 					</ul>
 				</nav>
 			</header>
@@ -61,9 +66,9 @@ Template Name: Главная
     <div class="catalog">
  
           <?php while ( $catalog_products_query->have_posts() ) : $catalog_products_query->the_post(); ?>
-           <div class="catalog__item" data-category="mushrooms">
+          
            <?php echo get_template_part('product-content'); ?>
-          </div>
+          
           <?php endwhile; ?>
 
          <?php endif; ?>

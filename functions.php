@@ -47,7 +47,7 @@ function theme_support() {
   register_nav_menu( 'menu_main_header', 'Меню в шапке' );
   // добавляет изображение к записи когда добавляешь товар
   add_theme_support('post-thumbnails');
-  add_image_size('product', 294, 300, true);
+  add_image_size('product', 768, 768, true);
    // добавляет изображение к записи когда добавляешь товар
 }
 
@@ -127,3 +127,11 @@ function register_post_types() {
     'hierarchical'  => true,
   ]);
 }
+
+function sanitize_pagination($content) {
+  // Remove h2 tag
+  $content = preg_replace('#<h2.*?>(.*?)<\/h2>#si', '', $content);
+  return $content;
+}
+
+add_action('navigation_markup_template', 'sanitize_pagination');

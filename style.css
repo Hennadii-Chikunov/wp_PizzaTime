@@ -829,6 +829,17 @@ xs: 576px
   outline: none;
 }
 
+body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-height: 100vh;
+}
+
 img {
   max-width: 100%;
   height: auto;
@@ -1677,3 +1688,51 @@ button {
 }
 
 /* / .socials */
+/* страница товары */
+.single-page {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.nav-links {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 22px;
+  color: inherit;
+}
+
+.nav-links a,
+.nav-links span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #041f1d;
+  border-right: 0;
+  color: #1da1f2;
+  font-weight: 900;
+}
+
+.nav-links *:last-child {
+  border: 2px solid #041f1d;
+}
+
+.nav-links .current {
+  background-color: #00100f;
+}
