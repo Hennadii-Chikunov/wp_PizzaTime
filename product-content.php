@@ -16,17 +16,20 @@
 
 <div class="catalog__item" data-category=<?php echo $product_categories_str; ?>">
 <div class="product catalog__product">
-
-	<picture>
+	<a class="product__img-link" href="<?php the_permalink(); ?>">
+	   <picture>
 		<source type="image/webp"
 			srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
 			data-srcset="<?php echo $product_img_src_webp; ?>">
 		<img class="product__img lazy"
 			src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
 			data-src="<?php echo $product_img_src; ?>" alt="">
-	</picture>
+	   </picture>
+   </a>
 	<div class="product__content">
-		<h3 class="product__title"><?php the_title(); ?></h3>
+		<a class="product__link" href="<?php the_permalink(); ?>">
+		   <h3 class="product__title"><?php the_title(); ?></h3>
+	   </a>
 		<div class="product__description">
 			<?php the_excerpt(); ?>
 		</div>

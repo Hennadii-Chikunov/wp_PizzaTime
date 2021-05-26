@@ -367,7 +367,7 @@
 /* product start */
 (function () {
   // здесь мы находим каталог
-  var catalog = document.querySelector(".catalog");
+  var catalog = document.querySelector(".js-catalog");
 
   // если catalog = null то мы возвращаемся
   // почему пишется именно такая конструкция, а не просто дальше пишется код внутри if

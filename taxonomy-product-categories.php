@@ -30,10 +30,9 @@
       </nav >
     </header>
 
-
+ <div class="catalog">
   <?php if ( have_posts() ) : ?>
-    <div class="catalog">
-
+   
     <?php while ( have_posts() ) : the_post(); ?>
       <?php echo get_template_part('product-content'); ?>
     <?php endwhile; ?>

@@ -1,5 +1,11 @@
+<?php
+/*
+Template Name: О нас
+*/
+?>
+<?php $page_id = get_the_ID(); ?>
 <?php get_header(); ?>
-// теперь все страницы которые не имеют свой шаблон будут ссылаться на index.php 
+
 <section class="section single-page">
   <div class="container single-page__container">
     <h2 class="section__title  section__title--accent"><?php the_title(); ?></h2>

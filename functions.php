@@ -135,3 +135,14 @@ function sanitize_pagination($content) {
 }
 
 add_action('navigation_markup_template', 'sanitize_pagination');
+
+add_filter( 'nav_menu_css_class', 'add_current_class_on_taxonomy_page', 10, 4 );
+function add_current_class_on_taxonomy_page( $classes ){
+  $post_type = get_post_type();
+
+  if (is_tax() && $post_type === 'product' && array_search('menu-item-object-product', $classes)) {
+    array_push($classes, 'current-menu-item');
+  }
+
+  return $classes;
+}

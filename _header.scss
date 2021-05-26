@@ -30,6 +30,9 @@
   }
   &__list {
     display: flex;
+    .current-menu-item a:not(:hover) {
+      color: #ffa650;
+    }
   }
   &__link,
   &__list a {
